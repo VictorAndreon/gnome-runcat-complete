@@ -11,3 +11,4 @@ po/*~
 tsconfig.alias.json
 .#*
 .build/
+__pycache__/

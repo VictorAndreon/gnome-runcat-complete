@@ -9,51 +9,65 @@ Animation speed changes depending on CPU usage.
 
 ![RunCat for GNOME Shell](assets/runcat-header.gif)
 
+## System metrics (fork)
+
+This fork extends RunCat with a [RunCat Neo](https://github.com/runcat-dev/RunCatNeo)-like
+dashboard. Click the cat to see a card per metric:
+
+- **CPU** — total, system, user and idle time, temperature and a usage chart
+- **Memory** — used, available, cache, swap and a usage chart
+- **Storage** — used/total space and a usage bar (any mount point, `/` by default)
+- **Battery** — level, power source, status, time remaining, power draw, health and cycle count
+- **Network** — connection type, local IP, upload and download speed
+
+CPU temperature, memory, storage, battery level and network speed can also be
+shown next to the cat in the top bar. When the cards don't fit the screen height, the menu grows
+sideways into columns. Everything is configurable on the
+**Metrics** page of the preferences.
+
+<img src="assets/runcat-dashboard.png" width="370" alt="RunCat dashboard" />
+
+Data comes straight from the kernel (`/proc`, `/sys`) and NetworkManager, no extra
+packages are needed.
+
+### Custom metrics
+
+Scripts, cron jobs and hooks can add their own cards by writing a small JSON file to
+`~/.config/runcat/metrics/` (the same format as RunCat Neo's custom metrics). Ready-made
+samples: **Claude Code usage** (5-hour/7-day limits, context, cost), **Claude Code sessions**
+through hooks (working / waiting for you / done) and **GPU** (NVIDIA and AMD).
+See [docs/custom-metrics.md](docs/custom-metrics.md).
+
 ## Philosophy
 
-**RunCat is intentionally minimalistic** — a running cat in the top bar and a
-CPU percentage next to it, nothing more. The extension is not meant to be a
-system monitor, and it will never grow dozens of settings, graphs, sensors, or
-extra indicators — there are plenty of other extensions for that. And if you
-already use a full-featured monitoring tool, that's great: the cat will happily
-run alongside it in your top bar.
+The upstream **RunCat is intentionally minimalistic** — a running cat in the top bar and a
+CPU percentage next to it. This fork trades part of that minimalism for the metrics above,
+which is why these changes live here and not upstream.
 
 Before opening a pull request, please read [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Installation
 
-This is the recommended method for installation, as it doesn't require the build dependencies for installation. You can install this extension by visiting [the GNOME Shell Extensions page](https://extensions.gnome.org/extension/2986/runcat/) for this extension.
+This fork uses its own UUID (`runcat@victorandreon`) and settings, so it never conflicts
+with the RunCat published on extensions.gnome.org.
 
-[<img src="assets/get-it-on-ego.png" height="100">](https://extensions.gnome.org/extension/2986/runcat/)
+You need `npm` installed. Clone this repository and run:
 
-### Manual installation
-
-#### From source code
-If you want to install the extension from sources, clone [the RunCat repository](https://github.com/win0err/gnome-runcat), navigate to the cloned directory and run, you need `npm` installed:
 ```bash
 $ npm i # one time only
 $ make install
 ```
 
-#### Release ZIP-archive
-If you want to install the extension from release zip-archive,
-download `runcat@kolesnikov.se.shell-extension.zip` from [the releases section](https://github.com/win0err/gnome-runcat/releases) and run:
-```bash
-$ gnome-extensions install path/to/runcat@kolesnikov.se.shell-extension.zip --force
-```
+Then log out and log in, and enable it (GNOME Extensions → RunCat → On, or
+`gnome-extensions enable runcat@victorandreon`).
 
-#### After installation:
-1. Restart the GNOME Shell: Log Out, then Log In;
-2. Enable the extension:
-    - Open GNOME Extensions → RunCat → On;
-    - or Run in terminal: `gnome-extensions enable runcat@kolesnikov.se`.
-
+If the original RunCat is installed, remove it to avoid two cats in the top bar:
+`gnome-extensions uninstall runcat@kolesnikov.se`.
 
 ### Manage RunCat preferences
 - Right-click on the extension button on the top bar → Settings;
 - or Open GNOME Extensions → RunCat → ⚙️;
-- or Open [RunCat on GNOME Extensions portal](https://extensions.gnome.org/extension/2986/runcat/) → ⚙️;
-- or Manage directly in `dconf`: `dconf list /org/gnome/shell/extensions/runcat/`.
+- or Manage directly in `dconf`: `dconf list /org/gnome/shell/extensions/runcat-victorandreon/`.
 
 ## Translations
 
