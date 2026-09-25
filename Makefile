@@ -3,7 +3,7 @@
 .PHONY : build clean install uninstall open-prefs spawn-gnome-shell translations compile
 .DEFAULT_GOAL := build
 
-UUID = runcat@kolesnikov.se
+UUID = runcat@victorandreon
 DIST_ARCHIVE = $(UUID).shell-extension.zip
 LOCAL = $(HOME)/.local/share/gnome-shell/extensions
 
@@ -16,7 +16,7 @@ translations_ts_sources = src/indicator.ts src/prefs.ts
 translations_ui_sources = $(wildcard src/resources/ui/*.ui)
 translations = $(wildcard po/*.po)
 
-schema = src/schemas/org.gnome.shell.extensions.runcat.gschema.xml
+schema = src/schemas/org.gnome.shell.extensions.runcat-victorandreon.gschema.xml
 stylesheet = src/stylesheet.css
 
 build: dist/$(DIST_ARCHIVE)
