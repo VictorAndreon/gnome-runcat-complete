@@ -7,6 +7,7 @@ import '@girs/glib-2.0'
 import '@girs/gobject-2.0'
 import '@girs/gtk-4.0'
 import '@girs/gtop-2.0'
+import '@girs/nm-1.0'
 import '@girs/st-18'
 import '@girs/clutter-18'
 
