@@ -1,0 +1,109 @@
+#!/usr/bin/env python3
+"""
+runcat-metric — write RunCat custom metrics from any script, cron job or hook.
+
+Examples:
+
+    # a card with two rows, the second one with a progress bar
+    runcat-metric write backup --title "Backup" --icon drive-harddisk-symbolic \
+        --row "Last run" "today 03:00" \
+        --bar "Disk" "71%" 0.71 \
+        --panel "OK"
+
+    # remove the card
+    runcat-metric remove backup
+
+    # print the file path of a metric
+    runcat-metric path backup
+
+Files are written atomically to $XDG_CONFIG_HOME/runcat/metrics/<id>.json
+(~/.config/runcat/metrics by default), where RunCat picks them up automatically.
+"""
+
+import argparse
+import json
+import os
+import re
+import sys
+import tempfile
+from datetime import datetime, timezone
+from pathlib import Path
+
+METRICS_DIR = Path(os.environ.get("XDG_CONFIG_HOME") or Path.home() / ".config") / "runcat" / "metrics"
+
+
+def metric_path(metric_id: str) -> Path:
+    if not re.fullmatch(r"[A-Za-z0-9_.-]+", metric_id) or metric_id.startswith("."):
+        sys.exit(f"runcat-metric: invalid id {metric_id!r} (use letters, digits, '.', '_' and '-')")
+    return METRICS_DIR / f"{metric_id}.json"
+
+
+def write_atomically(path: Path, data: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, tmp = tempfile.mkstemp(prefix=".runcat-", suffix=".tmp", dir=str(path.parent))
+    with os.fdopen(fd, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    os.replace(tmp, path)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Write RunCat custom metrics.")
+    sub = parser.add_subparsers(dest="command", required=True)
+
+    write = sub.add_parser("write", help="create or replace a metric card")
+    write.add_argument("id", help="file name without .json, e.g. 'backup'")
+    write.add_argument("--title", required=True, help="card title")
+    write.add_argument("--icon", help="bundled icon (cpu, memory, temperature, chart, sparkle, gpu), "
+                                      "an icon name such as 'weather-clear-symbolic' or an absolute path")
+    write.add_argument("--panel", help="short text shown in the top bar (when enabled in preferences)")
+    write.add_argument("--row", nargs=2, action="append", default=[], metavar=("TITLE", "VALUE"),
+                       help="a text row")
+    write.add_argument("--bar", nargs=3, action="append", default=[], metavar=("TITLE", "VALUE", "FRACTION"),
+                       help="a row with a progress bar, FRACTION in [0, 1]")
+
+    remove = sub.add_parser("remove", help="delete a metric card")
+    remove.add_argument("id")
+
+    path = sub.add_parser("path", help="print the file path of a metric")
+    path.add_argument("id")
+
+    args = parser.parse_args()
+    target = metric_path(args.id)
+
+    if args.command == "path":
+        print(target)
+    elif args.command == "remove":
+        target.unlink(missing_ok=True)
+    else:
+        # rows keep the command line order: --row and --bar may be interleaved
+        rows = []
+        argv = iter(sys.argv)
+        row_values = iter(args.row)
+        bar_values = iter(args.bar)
+        for arg in argv:
+            if arg == "--row":
+                title, value = next(row_values)
+                rows.append({"title": title, "formattedValue": value})
+            elif arg == "--bar":
+                title, value, fraction = next(bar_values)
+                try:
+                    normalized = min(1.0, max(0.0, float(fraction)))
+                except ValueError:
+                    sys.exit(f"runcat-metric: FRACTION must be a number, got {fraction!r}")
+                rows.append({"title": title, "formattedValue": value, "normalizedValue": normalized})
+
+        data = {
+            "title": args.title,
+            "metrics": rows,
+            "lastUpdatedDate": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        }
+        if args.icon:
+            data["icon"] = args.icon
+        if args.panel is not None:
+            data["metricsBarValue"] = args.panel
+
+        write_atomically(target, data)
+
+
+if __name__ == "__main__":
+    main()
