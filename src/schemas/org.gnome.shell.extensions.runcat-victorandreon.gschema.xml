@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
-	<enum id="org.gnome.shell.extensions.runcat.DisplayingItems">
+	<enum id="org.gnome.shell.extensions.runcat-victorandreon.DisplayingItems">
 		<value value="0" nick="character-and-percentage" />
 		<value value="1" nick="percentage-only" />
 		<value value="2" nick="character-only" />
 	</enum>
 
 	<schema
-		id="org.gnome.shell.extensions.runcat"
-		path="/org/gnome/shell/extensions/runcat/"
+		id="org.gnome.shell.extensions.runcat-victorandreon"
+		path="/org/gnome/shell/extensions/runcat-victorandreon/"
 	>
 
 		<key type="i" name="idle-threshold">
@@ -16,7 +16,7 @@
 			<summary>Idle threshold</summary>
 		</key>
 
-		<key name="displaying-items" enum="org.gnome.shell.extensions.runcat.DisplayingItems">
+		<key name="displaying-items" enum="org.gnome.shell.extensions.runcat-victorandreon.DisplayingItems">
 			<default>'character-only'</default>
 			<summary>Displaying items</summary>
 		</key>
