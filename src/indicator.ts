@@ -13,15 +13,21 @@ import { type Extension, gettext as _ } from 'resource:///org/gnome/shell/extens
 import {
 	LOG_PREFIX,
 	SYSTEM_MONITOR_COMMAND,
+	DASHBOARD_CARD_IDS,
+	PANEL_METRIC_IDS,
 	displayingItemNickToValue,
 	SettingsSchemaKeys,
 	ReactiveProperties,
 } from './constants.js'
 
 import { getAnimationCycleDurationMs, createAnimationTicker } from './math.js'
-import { formatNumber, getSpritesPack } from './utils.js'
+import { formatNumber, getSpritesPack, sanitizeCssColor } from './utils.js'
 
-import createCpuGenerator, { MAX_CPU_UTILIZATION } from './dataProviders/cpu.js'
+import { MAX_CPU_UTILIZATION } from './dataProviders/cpu.js'
+import MetricsSampler, { type MetricsSnapshot } from './metrics.js'
+import Dashboard from './dashboard.js'
+import PanelMetrics from './panelMetrics.js'
+import CustomMetricsWatcher from './dataProviders/customMetrics.js'
 
 import type {
 	DisplayingItems,
@@ -29,6 +35,8 @@ import type {
 	RunCatIndicatorReactiveProperties,
 	DisplayingItemNick,
 	GObjectProperties,
+	DashboardCardId,
+	PanelMetricId,
 } from './types'
 
 
@@ -100,8 +108,18 @@ export default class RunCatIndicator extends PanelMenu.Button implements RunCatI
 	sprites: Record<CharacterState, Gio.Icon[]>
 
 	animationTimeoutId: number | null = null
-	refreshDataTimeoutId!: number
+	refreshDataTimeoutId: number | null = null
 	displayingItemsHandlerId!: number
+	metricsSettingsHandlerIds: number[] = []
+
+	sampler = new MetricsSampler()
+	lastSnapshot: MetricsSnapshot | null = null
+	isSampling = false
+	isDestroyed = false
+
+	panelMetrics!: PanelMetrics
+	customMetrics!: CustomMetricsWatcher
+	dashboard!: Dashboard
 
 	constructor(extension: Extension) {
 		super(0.5, 'RunCat', false)
@@ -112,8 +130,10 @@ export default class RunCatIndicator extends PanelMenu.Button implements RunCatI
 		this.sprites = getSpritesPack(this.extension.path)
 
 		this.initSettingsListeners()
-		this.initDataRefreshSource()
 		this.initUi()
+		this.initCustomMetrics()
+		this.initAppearance()
+		this.initDataRefreshSource()
 	}
 
 	get characterState(): CharacterState {
@@ -135,21 +155,122 @@ export default class RunCatIndicator extends PanelMenu.Button implements RunCatI
 		return useCustomSystemMonitor ? customSystemMonitorCommand : SYSTEM_MONITOR_COMMAND
 	}
 
-	initDataRefreshSource() {
-		const cpuDataProvider = createCpuGenerator()
+	get enabledPanelMetrics(): Record<PanelMetricId, boolean> {
+		return Object.fromEntries(PANEL_METRIC_IDS.map(
+			id => [id, this.settings.get_boolean(SettingsSchemaKeys.PANEL_METRICS[id])],
+		)) as Record<PanelMetricId, boolean>
+	}
 
+	get enabledDashboardCards(): Record<DashboardCardId, boolean> {
+		return Object.fromEntries(DASHBOARD_CARD_IDS.map(
+			id => [id, this.settings.get_boolean(SettingsSchemaKeys.DASHBOARD_CARDS[id])],
+		)) as Record<DashboardCardId, boolean>
+	}
+
+	initDataRefreshSource() {
 		const refresh = () => {
-			cpuDataProvider.next().then(
-				({ value }) => { this.cpuUsage = value },
-				(e: unknown) => console.error(`${LOG_PREFIX}: ${e}`),
-			)
+			// skip a tick instead of piling up requests when sampling is slow
+			if (this.isSampling) {
+				return GLib.SOURCE_CONTINUE
+			}
+
+			this.isSampling = true
+
+			this.sampler.sample(this.settings.get_string(SettingsSchemaKeys.STORAGE_PATH))
+				.then((snapshot) => {
+					// the indicator may have been destroyed while sampling
+					if (this.isDestroyed) return
+
+					this.lastSnapshot = snapshot
+					this.cpuUsage = snapshot.cpu.usage
+					this.renderMetrics()
+				})
+				.catch((e: unknown) => console.error(`${LOG_PREFIX}: ${e}`))
+				.finally(() => { this.isSampling = false })
 
 			return GLib.SOURCE_CONTINUE
 		}
 
-		this.refreshDataTimeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 3_000, refresh)
+		const restart = () => {
+			if (this.refreshDataTimeoutId !== null) {
+				GLib.source_remove(this.refreshDataTimeoutId)
+			}
 
+			const intervalS = Math.max(1, this.settings.get_int(SettingsSchemaKeys.REFRESH_INTERVAL))
+
+			this.refreshDataTimeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, intervalS * 1_000, refresh)
+		}
+
+		this.metricsSettingsHandlerIds.push(
+			this.settings.connect(`changed::${SettingsSchemaKeys.REFRESH_INTERVAL}`, restart),
+		)
+
+		restart()
 		refresh()
+	}
+
+	initCustomMetrics() {
+		this.customMetrics = new CustomMetricsWatcher(() => this.renderMetrics())
+
+		const updateFiles = () => this.customMetrics.setExplicitPaths(
+			this.settings.get_strv(SettingsSchemaKeys.CUSTOM_METRICS.FILES),
+		)
+
+		this.metricsSettingsHandlerIds.push(
+			this.settings.connect(`changed::${SettingsSchemaKeys.CUSTOM_METRICS.FILES}`, updateFiles),
+			...[SettingsSchemaKeys.CUSTOM_METRICS.PANEL_FILES, SettingsSchemaKeys.CUSTOM_METRICS.HIDDEN_FILES].map(
+				key => this.settings.connect(`changed::${key}`, () => this.renderMetrics()),
+			),
+		)
+
+		updateFiles()
+	}
+
+	initAppearance() {
+		const updateAppearance = () => {
+			this.dashboard.setColumns(this.settings.get_int(SettingsSchemaKeys.APPEARANCE.DASHBOARD_COLUMNS))
+			this.dashboard.setAppearance({
+				chartColor: sanitizeCssColor(this.settings.get_string(SettingsSchemaKeys.APPEARANCE.CHART_COLOR)),
+				backgroundColor: sanitizeCssColor(
+					this.settings.get_string(SettingsSchemaKeys.APPEARANCE.DASHBOARD_BACKGROUND),
+				),
+			})
+
+			this.renderMetrics()
+		}
+
+		for (const key of Object.values(SettingsSchemaKeys.APPEARANCE)) {
+			this.metricsSettingsHandlerIds.push(this.settings.connect(`changed::${key}`, updateAppearance))
+		}
+
+		updateAppearance()
+	}
+
+	renderMetrics() {
+		if (!this.lastSnapshot) {
+			return
+		}
+
+		// the watcher reports its first files before the constructor is done
+		const customSources = this.customMetrics?.sources ?? []
+
+		this.panelMetrics.update(
+			this.lastSnapshot,
+			this.enabledPanelMetrics,
+			customSources,
+			this.settings.get_strv(SettingsSchemaKeys.CUSTOM_METRICS.PANEL_FILES),
+		)
+
+		// the dashboard is only visible (and worth updating) while the menu is open
+		if (this.menu.isOpen) {
+			const hiddenPaths = this.settings.get_strv(SettingsSchemaKeys.CUSTOM_METRICS.HIDDEN_FILES)
+
+			this.dashboard.update(
+				this.lastSnapshot,
+				this.enabledDashboardCards,
+				customSources.filter(({ path }) => !hiddenPaths.includes(path)),
+			)
+		}
 	}
 
 	initUi() {
@@ -196,12 +317,26 @@ export default class RunCatIndicator extends PanelMenu.Button implements RunCatI
 			null,
 		)
 
+		this.panelMetrics = new PanelMetrics(this.extension.path)
+
 		box.add_child(icon)
 		box.add_child(label)
+		box.add_child(this.panelMetrics.actor)
 
 		this.add_child(box)
 
 		this.initAnimation()
+
+		this.dashboard = new Dashboard(this.extension.path)
+
+		this.menu.addMenuItem(this.dashboard.item)
+		this.menu.addMenuItem(new PopupSeparatorMenuItem())
+
+		this.menu.connect('open-state-changed', (_menu, isOpen: boolean) => {
+			if (isOpen) {
+				this.renderMetrics()
+			}
+		})
 
 		this.menu.addAction(_('Open System Monitor'), () => {
 			try {
@@ -343,12 +478,34 @@ export default class RunCatIndicator extends PanelMenu.Button implements RunCatI
 		)
 
 		updateDisplayingItems()
+
+		const metricsKeys = [
+			...Object.values(SettingsSchemaKeys.PANEL_METRICS),
+			...Object.values(SettingsSchemaKeys.DASHBOARD_CARDS),
+		]
+
+		for (const key of metricsKeys) {
+			this.metricsSettingsHandlerIds.push(
+				this.settings.connect(`changed::${key}`, () => this.renderMetrics()),
+			)
+		}
 	}
 
 	destroy() {
-		GLib.source_remove(this.refreshDataTimeoutId)
+		this.isDestroyed = true
+
+		if (this.refreshDataTimeoutId !== null) {
+			GLib.source_remove(this.refreshDataTimeoutId)
+			this.refreshDataTimeoutId = null
+		}
+
 		this.settings.disconnect(this.displayingItemsHandlerId)
+		this.metricsSettingsHandlerIds.forEach(id => this.settings.disconnect(id))
+		this.metricsSettingsHandlerIds = []
+
 		this.stopAnimation()
+		this.sampler.destroy()
+		this.customMetrics?.destroy()
 
 		super.destroy()
 	}

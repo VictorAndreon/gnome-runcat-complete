@@ -1,6 +1,6 @@
 {
 	"name": "RunCat",
-	"description": "The cat tells you the CPU usage by running speed",
+	"description": "The cat tells you the CPU usage by running speed. Click it for a dashboard with CPU, memory, storage, battery and network metrics",
 	"uuid": "runcat@victorandreon",
 	"gettext-domain": "runcat@victorandreon",
 	"settings-schema": "org.gnome.shell.extensions.runcat-victorandreon",
