@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+	<enum id="org.gnome.shell.extensions.runcat-victorandreon.DisplayingItems">
+		<value value="0" nick="character-and-percentage" />
+		<value value="1" nick="percentage-only" />
+		<value value="2" nick="character-only" />
+	</enum>
+
+	<schema
+		id="org.gnome.shell.extensions.runcat-victorandreon"
+		path="/org/gnome/shell/extensions/runcat-victorandreon/"
+	>
+
+		<key type="i" name="idle-threshold">
+			<default>0</default>
+			<summary>Idle threshold</summary>
+		</key>
+
+		<key name="displaying-items" enum="org.gnome.shell.extensions.runcat-victorandreon.DisplayingItems">
+			<default>'character-only'</default>
+			<summary>Displaying items</summary>
+		</key>
+
+		<key name="invert-speed" type="b">
+			<default>false</default>
+			<summary>Invert speed</summary>
+		</key>
+
+		<key name="smooth-speed-changes" type="b">
+			<default>true</default>
+			<summary>Smooth speed changes</summary>
+		</key>
+
+		<key name="custom-system-monitor-enabled" type="b">
+			<default>false</default>
+			<summary>Enable custom system monitor</summary>
+		</key>
+
+		<key name="custom-system-monitor-command" type="s">
+			<default>'gnome-system-monitor -r'</default>
+			<summary>Custom system monitor command</summary>
+		</key>
+
+		<key name="refresh-interval" type="i">
+			<range min="1" max="10" />
+			<default>3</default>
+			<summary>Refresh interval</summary>
+			<description>How often system metrics are sampled, in seconds</description>
+		</key>
+
+		<key name="storage-path" type="s">
+			<default>'/'</default>
+			<summary>Storage path</summary>
+			<description>Any path on the filesystem whose usage is displayed</description>
+		</key>
+
+		<key name="panel-show-temperature" type="b">
+			<default>false</default>
+			<summary>Show CPU temperature in the top bar</summary>
+		</key>
+
+		<key name="panel-show-memory" type="b">
+			<default>false</default>
+			<summary>Show memory usage in the top bar</summary>
+		</key>
+
+		<key name="panel-show-storage" type="b">
+			<default>false</default>
+			<summary>Show storage usage in the top bar</summary>
+		</key>
+
+		<key name="panel-show-battery" type="b">
+			<default>false</default>
+			<summary>Show battery level in the top bar</summary>
+		</key>
+
+		<key name="panel-show-network" type="b">
+			<default>false</default>
+			<summary>Show network speed in the top bar</summary>
+		</key>
+
+		<key name="dashboard-show-cpu" type="b">
+			<default>true</default>
+			<summary>Show the CPU card in the menu</summary>
+		</key>
+
+		<key name="dashboard-show-memory" type="b">
+			<default>true</default>
+			<summary>Show the memory card in the menu</summary>
+		</key>
+
+		<key name="dashboard-show-storage" type="b">
+			<default>true</default>
+			<summary>Show the storage card in the menu</summary>
+		</key>
+
+		<key name="dashboard-show-battery" type="b">
+			<default>true</default>
+			<summary>Show the battery card in the menu</summary>
+		</key>
+
+		<key name="dashboard-show-network" type="b">
+			<default>true</default>
+			<summary>Show the network card in the menu</summary>
+		</key>
+
+		<key name="custom-metrics-files" type="as">
+			<default>[]</default>
+			<summary>Custom metrics files</summary>
+			<description>JSON files displayed as dashboard cards, in addition to the files in ~/.config/runcat/metrics</description>
+		</key>
+
+		<key name="custom-metrics-panel-files" type="as">
+			<default>[]</default>
+			<summary>Custom metrics shown in the top bar</summary>
+			<description>Paths of the custom metrics files whose value is displayed next to the character</description>
+		</key>
+
+		<key name="custom-metrics-hidden-files" type="as">
+			<default>[]</default>
+			<summary>Custom metrics hidden from the menu</summary>
+			<description>Paths of the custom metrics files whose card is not displayed in the menu</description>
+		</key>
+
+		<key name="chart-color" type="s">
+			<default>'#ff9500'</default>
+			<summary>Chart color</summary>
+			<description>CSS color of the dashboard charts and bars</description>
+		</key>
+
+		<key name="dashboard-background-color" type="s">
+			<default>'rgba(127,127,127,0.12)'</default>
+			<summary>Dashboard background</summary>
+			<description>CSS color, with transparency, of the dashboard background</description>
+		</key>
+
+		<key name="dashboard-columns" type="i">
+			<range min="0" max="4" />
+			<default>0</default>
+			<summary>Menu columns</summary>
+			<description>Number of columns of the menu dashboard, 0 to add columns automatically when the cards don't fit the screen height</description>
+		</key>
+	</schema>
+</schemalist>

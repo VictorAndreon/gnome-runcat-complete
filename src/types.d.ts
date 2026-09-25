@@ -6,6 +6,10 @@ export type DisplayingItems = { character: boolean; percentage: boolean }
 
 export type DisplayingItemNick = 'character-and-percentage' | 'percentage-only' | 'character-only'
 
+export type PanelMetricId = 'memory' | 'storage' | 'battery' | 'network' | 'temperature'
+
+export type DashboardCardId = 'cpu' | 'memory' | 'storage' | 'battery' | 'network'
+
 export type CharacterState = 'idle' | 'active'
 
 export interface RunCatIndicatorReactiveProperties {

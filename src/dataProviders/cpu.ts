@@ -1,14 +1,19 @@
-import Gio from 'gi://Gio'
 import { LOG_PREFIX } from '../constants.js'
+import { readText } from './fs.js'
 
 
 export const MAX_CPU_UTILIZATION = 1.0
 
-type CpuStats = { active: number, total: number }
+type CpuStats = { user: number, system: number, active: number, total: number }
 
+export type CpuSample = {
+	// utilization in [0, 1]
+	usage: number
+	user: number
+	system: number
+	idle: number
+}
 
-// eslint-disable-next-line no-underscore-dangle
-Gio._promisify(Gio.File.prototype, 'load_contents_async')
 
 let GTop: typeof import('gi://GTop').default | undefined
 
@@ -21,29 +26,39 @@ try {
 }
 
 
-export default async function* (): AsyncGenerator<number, number, void> {
-	let { active: prevActive, total: prevTotal } = await getCpuStats()
+export default async function* (): AsyncGenerator<CpuSample, CpuSample, void> {
+	let prev = await getCpuStats()
 
 	while (true) {
-		const { active, total } = await getCpuStats()
+		const current = await getCpuStats()
 
-		let utilization = (active - prevActive) / Math.max((total - prevTotal), MAX_CPU_UTILIZATION)
+		const totalDelta = Math.max(current.total - prev.total, MAX_CPU_UTILIZATION)
+		const ratio = (value: number, prevValue: number) => clamp((value - prevValue) / totalDelta)
 
-		if (Number.isNaN(utilization) || !Number.isFinite(utilization)) {
-			const data = JSON.stringify({ total, active, prevTotal, prevActive })
-
-			console.log(`${LOG_PREFIX}: cpu utilization is ${utilization}, data: ${data}`)
-
-			utilization = 0
+		let sample: CpuSample = {
+			usage: ratio(current.active, prev.active),
+			user: ratio(current.user, prev.user),
+			system: ratio(current.system, prev.system),
+			idle: 0,
 		}
 
-		prevActive = active
-		prevTotal = total
+		sample.idle = clamp(MAX_CPU_UTILIZATION - sample.usage)
 
-		yield utilization
+		if (Object.values(sample).some(n => Number.isNaN(n) || !Number.isFinite(n))) {
+			const data = JSON.stringify({ current, prev })
+
+			console.log(`${LOG_PREFIX}: cpu utilization is ${sample.usage}, data: ${data}`)
+
+			sample = { usage: 0, user: 0, system: 0, idle: MAX_CPU_UTILIZATION }
+		}
+
+		prev = current
+
+		yield sample
 	}
 }
 
+const clamp = (value: number) => Math.min(MAX_CPU_UTILIZATION, Math.max(0, value))
 
 
 async function getCpuStats(): Promise<CpuStats> {
@@ -59,22 +74,21 @@ async function getCpuStats(): Promise<CpuStats> {
 		GTop.glibtop_get_cpu(cpu)
 
 		return {
+			user: cpu.user + cpu.nice,
+			system: cpu.sys,
 			active: cpu.user + cpu.sys + cpu.nice,
 			total: cpu.total,
 		}
 	} catch (e) {
 		console.error(`${LOG_PREFIX}: ${e}`)
 
-		return { active: 0, total: 0 }
+		return { user: 0, system: 0, active: 0, total: 0 }
 	}
 }
 
 
 async function getCpuStatsFallback(): Promise<CpuStats> {
-	const procStatFile = Gio.File.new_for_path('/proc/stat')
-
-	const [bytes] = await procStatFile.load_contents_async(null)
-	const contents = new TextDecoder('utf-8').decode(bytes)
+	const contents = await readText('/proc/stat') ?? ''
 
 	const data = contents
 		.split('\n')
@@ -103,6 +117,8 @@ function parseCpuLine(line: string): [string, CpuStats] {
 	return [
 		name,
 		{
+			user: user + nice,
+			system: sys,
 			active: user + sys + nice,
 			total: user + nice + sys + idle,
 		},

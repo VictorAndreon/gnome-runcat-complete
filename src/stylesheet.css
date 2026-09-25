@@ -12,3 +12,111 @@
     font-size: .9em;
     line-height: 1;
 }
+
+/* Top bar metrics */
+
+.runcat-panel-metrics {
+    spacing: .75em;
+}
+
+.runcat-panel-metric {
+    spacing: .25em;
+}
+
+.runcat-panel-metric__icon {
+    padding: 0;
+}
+
+.runcat-panel-metric__label {
+    font-size: .9em;
+    font-feature-settings: "tnum";
+}
+
+.runcat-panel-metric__label--compact {
+    font-size: .6em;
+    font-weight: bold;
+    line-height: 1.1;
+    min-width: 6em;
+}
+
+/* Menu dashboard */
+
+.runcat-dashboard-item {
+    padding: 0 .5em;
+}
+
+.runcat-dashboard {
+    spacing: 2em;
+    padding: .5em 1em;
+    border-radius: 12px;
+    background-color: rgba(127, 127, 127, .12);
+}
+
+.runcat-dashboard__column {
+    width: 24em;
+}
+
+.runcat-card--separated {
+    border-top: 1px solid rgba(127, 127, 127, .35);
+}
+
+.runcat-card {
+    spacing: 1em;
+    padding: .5em 0;
+}
+
+.runcat-card__icon {
+    icon-size: 32px;
+    -st-icon-style: symbolic;
+}
+
+.runcat-card__content {
+    spacing: .25em;
+}
+
+.runcat-card__title {
+    font-size: 1.1em;
+    font-weight: bold;
+    font-feature-settings: "tnum";
+}
+
+.runcat-card__rows {
+    padding-left: .75em;
+}
+
+.runcat-card__row {
+    font-size: .95em;
+    font-feature-settings: "tnum";
+}
+
+.runcat-chart {
+    margin-top: .25em;
+    color: #ff9500;
+}
+
+.runcat-sparkline {
+    height: 28px;
+}
+
+.runcat-usage-bar {
+    height: 8px;
+}
+
+.runcat-card__metric {
+    spacing: .15em;
+    padding-bottom: .15em;
+}
+
+.runcat-usage-bar--thin {
+    height: 5px;
+    margin-top: 0;
+}
+
+.runcat-card__footer {
+    font-size: .8em;
+    color: rgba(127, 127, 127, 1);
+}
+
+.runcat-card__footer--error {
+    color: #e01b24;
+}
