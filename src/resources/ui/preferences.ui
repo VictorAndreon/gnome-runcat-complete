@@ -4,6 +4,7 @@
 
     <object class="AdwPreferencesPage" id="preferences-general">
         <property name="title" translatable="yes">General</property>
+        <property name="icon-name">preferences-system-symbolic</property>
 
         <child>
             <object class="AdwPreferencesGroup">
@@ -101,6 +102,213 @@
                         <style>
                             <class name="circular" />
                             <class name="destructive-action" />
+                        </style>
+                    </object>
+                </property>
+            </object>
+        </child>
+    </object>
+
+    <object class="AdwPreferencesPage" id="preferences-metrics">
+        <property name="title" translatable="yes">Metrics</property>
+        <property name="icon-name">utilities-system-monitor-symbolic</property>
+
+        <child>
+            <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">Sampling</property>
+
+                <child>
+                    <object class="AdwSpinRow" id="refresh-interval">
+                        <property name="title" translatable="yes">Refresh interval</property>
+                        <property name="subtitle" translatable="yes">How often metrics are updated, in seconds</property>
+                        <property name="adjustment">
+                            <object class="GtkAdjustment">
+                                <property name="lower">1</property>
+                                <property name="upper">10</property>
+                                <property name="step-increment">1</property>
+                                <property name="page-increment">1</property>
+                            </object>
+                        </property>
+                    </object>
+                </child>
+
+                <child>
+                    <object class="AdwEntryRow" id="storage-path">
+                        <property name="title" translatable="yes">Storage path</property>
+                        <property name="show-apply-button">True</property>
+                    </object>
+                </child>
+            </object>
+        </child>
+
+        <child>
+            <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">Appearance</property>
+
+                <child>
+                    <object class="AdwComboRow" id="dashboard-columns">
+                        <property name="title" translatable="yes">Menu layout</property>
+                        <property name="subtitle" translatable="yes">Automatic adds columns side by side when the cards don't fit the screen height</property>
+                        <property name="model">
+                            <object class="GtkStringList">
+                                <!-- index = number of columns, 0 = automatic -->
+                                <items>
+                                    <item translatable="yes">Automatic</item>
+                                    <item translatable="yes">1 column</item>
+                                    <item translatable="yes">2 columns</item>
+                                    <item translatable="yes">3 columns</item>
+                                    <item translatable="yes">4 columns</item>
+                                </items>
+                            </object>
+                        </property>
+                    </object>
+                </child>
+
+                <child>
+                    <object class="AdwActionRow" id="chart-color">
+                        <property name="title" translatable="yes">Chart color</property>
+                        <property name="subtitle" translatable="yes">Charts and bars in the menu</property>
+                    </object>
+                </child>
+
+                <child>
+                    <object class="AdwActionRow" id="dashboard-background-color">
+                        <property name="title" translatable="yes">Menu background</property>
+                        <property name="subtitle" translatable="yes">Lower the opacity for a more transparent background</property>
+                    </object>
+                </child>
+            </object>
+        </child>
+
+        <child>
+            <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">Top bar</property>
+                <property name="description" translatable="yes">Metrics displayed next to the character. CPU usage is configured with “Displaying items” on the General page</property>
+
+                <child>
+                    <object class="AdwSwitchRow" id="panel-show-temperature">
+                        <property name="title" translatable="yes">CPU temperature</property>
+                    </object>
+                </child>
+
+                <child>
+                    <object class="AdwSwitchRow" id="panel-show-memory">
+                        <property name="title" translatable="yes">Memory usage</property>
+                    </object>
+                </child>
+
+                <child>
+                    <object class="AdwSwitchRow" id="panel-show-storage">
+                        <property name="title" translatable="yes">Storage usage</property>
+                    </object>
+                </child>
+
+                <child>
+                    <object class="AdwSwitchRow" id="panel-show-battery">
+                        <property name="title" translatable="yes">Battery level</property>
+                        <property name="subtitle" translatable="yes">Hidden when there is no battery</property>
+                    </object>
+                </child>
+
+                <child>
+                    <object class="AdwSwitchRow" id="panel-show-network">
+                        <property name="title" translatable="yes">Network speed</property>
+                        <property name="subtitle" translatable="yes">Upload and download rates</property>
+                    </object>
+                </child>
+            </object>
+        </child>
+
+        <child>
+            <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">Menu dashboard</property>
+                <property name="description" translatable="yes">Cards displayed when clicking the character</property>
+
+                <child>
+                    <object class="AdwSwitchRow" id="dashboard-show-cpu">
+                        <property name="title" translatable="yes">CPU</property>
+                    </object>
+                </child>
+
+                <child>
+                    <object class="AdwSwitchRow" id="dashboard-show-memory">
+                        <property name="title" translatable="yes">Memory</property>
+                    </object>
+                </child>
+
+                <child>
+                    <object class="AdwSwitchRow" id="dashboard-show-storage">
+                        <property name="title" translatable="yes">Storage</property>
+                    </object>
+                </child>
+
+                <child>
+                    <object class="AdwSwitchRow" id="dashboard-show-battery">
+                        <property name="title" translatable="yes">Battery</property>
+                        <property name="subtitle" translatable="yes">Hidden when there is no battery</property>
+                    </object>
+                </child>
+
+                <child>
+                    <object class="AdwSwitchRow" id="dashboard-show-network">
+                        <property name="title" translatable="yes">Network</property>
+                    </object>
+                </child>
+            </object>
+        </child>
+    </object>
+
+    <object class="AdwPreferencesPage" id="preferences-custom-metrics">
+        <property name="title" translatable="yes">Custom</property>
+        <property name="icon-name">document-edit-symbolic</property>
+
+        <child>
+            <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">How it works</property>
+                <property name="description" translatable="yes">Any script, cron job or hook (for example a Claude Code status line) can write a small JSON file, and RunCat shows it as a card in the menu, updated as soon as the file changes. Files in the metrics folder are picked up automatically; files elsewhere can be added below.</property>
+
+                <child>
+                    <object class="AdwActionRow" id="custom-metrics-open-folder">
+                        <property name="title" translatable="yes">Open metrics folder</property>
+                        <property name="activatable">True</property>
+                        <child type="suffix">
+                            <object class="GtkImage">
+                                <property name="icon-name">folder-open-symbolic</property>
+                            </object>
+                        </child>
+                    </object>
+                </child>
+
+                <child>
+                    <object class="AdwActionRow" id="custom-metrics-docs">
+                        <property name="title" translatable="yes">File format and examples</property>
+                        <property name="subtitle" translatable="yes">Claude Code usage, Claude Code hooks, GPU and more</property>
+                        <property name="activatable">True</property>
+                        <child type="suffix">
+                            <object class="GtkImage">
+                                <property name="icon-name">adw-external-link-symbolic</property>
+                            </object>
+                        </child>
+                    </object>
+                </child>
+            </object>
+        </child>
+
+        <child>
+            <object class="AdwPreferencesGroup" id="custom-metrics-sources">
+                <property name="title" translatable="yes">Sources</property>
+                <property name="description" translatable="yes">Choose where each source is displayed: as a card in the menu and/or as a value in the top bar</property>
+                <property name="header-suffix">
+                    <object class="GtkButton" id="custom-metrics-add">
+                        <property name="valign">center</property>
+                        <child>
+                            <object class="AdwButtonContent">
+                                <property name="icon-name">list-add-symbolic</property>
+                                <property name="label" translatable="yes">Add file</property>
+                            </object>
+                        </child>
+                        <style>
+                            <class name="flat" />
                         </style>
                     </object>
                 </property>
