@@ -1,489 +1,489 @@
-# Russian translation for the GNOME RunCat Extension.
-# Copyright (C) 2022 Sergei Kolesnikov
-# This file is distributed under the same license as the GNOME RunCat package.
-# Sergei Kolesnikov <sergei@kolesnikov.se>, 2022.
+# Portuguese translations for gnome-runcat-extension package.
+# Copyright (C) 2026 THE gnome-runcat-extension'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-runcat-extension package.
+# Automatically generated, 2026.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-runcat-extension 20\n"
+"Project-Id-Version: gnome-runcat-extension 37\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-25 13:47+0000\n"
-"PO-Revision-Date: 2022-09-30 19:16+0300\n"
-"Last-Translator: Sergei Kolesnikov <sergei@kolesnikov.se>\n"
-"Language-Team: Russian\n"
-"Language: ru\n"
+"PO-Revision-Date: 2026-09-25 13:12+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: Brazilian Portuguese\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: src/indicator.ts:341
 msgid "Open System Monitor"
-msgstr "Открыть Системный монитор"
+msgstr "Abrir Monitor do Sistema"
 
 #: src/indicator.ts:346
 #, javascript-format
 msgid "Execution of “%s” failed"
-msgstr "Не удалось выполнить «%s»"
+msgstr "Falha ao executar “%s”"
 
 #: src/indicator.ts:354
 msgid "Settings"
-msgstr "Настройки"
+msgstr "Configurações"
 
 #: src/indicator.ts:359
 msgid "Failed to open extension settings"
-msgstr "Не удалось открыть настройки расширения"
+msgstr "Falha ao abrir as configurações da extensão"
 
 #: src/prefs.ts:70
 msgid "RunCat Settings"
-msgstr "Настройки RunCat"
+msgstr "Configurações do RunCat"
 
 #: src/prefs.ts:233 src/resources/ui/preferences.ui:97
 msgid "Reset"
-msgstr "Сбросить"
+msgstr "Restaurar"
 
 #: src/prefs.ts:312
 msgid "The file does not exist yet"
-msgstr ""
+msgstr "O arquivo ainda não existe"
 
 #: src/prefs.ts:330
 msgid "No custom metrics yet"
-msgstr ""
+msgstr "Nenhuma métrica personalizada ainda"
 
 #: src/prefs.ts:331
 #, javascript-format
 msgid "Write a JSON file to %s or add a file"
-msgstr ""
+msgstr "Grave um arquivo JSON em %s ou adicione um arquivo"
 
 #: src/prefs.ts:349
 msgid "Menu"
-msgstr ""
+msgstr "Menu"
 
 #: src/prefs.ts:352
 msgid "Show the card in the menu"
-msgstr ""
+msgstr "Mostrar o card no menu"
 
 #: src/prefs.ts:356 src/resources/ui/preferences.ui:185
 msgid "Top bar"
-msgstr ""
+msgstr "Barra superior"
 
 #: src/prefs.ts:359
 msgid "Show in the top bar"
-msgstr ""
+msgstr "Mostrar na barra superior"
 
 #: src/prefs.ts:374
 msgid "Remove"
-msgstr ""
+msgstr "Remover"
 
 #: src/prefs.ts:397
 msgid "JSON files"
-msgstr ""
+msgstr "Arquivos JSON"
 
 #: src/prefs.ts:405
 msgid "Add custom metrics file"
-msgstr ""
+msgstr "Adicionar arquivo de métricas"
 
 #: src/prefs.ts:478
 msgid "Version"
-msgstr "Версия"
+msgstr "Versão"
 
 #: src/dashboard.ts:172
 #, javascript-format
 msgid "Failed to read: %s"
-msgstr ""
+msgstr "Falha ao ler: %s"
 
 #: src/dashboard.ts:176
 #, javascript-format
 msgid "Updated %s"
-msgstr ""
+msgstr "Atualizado %s"
 
 #: src/dashboard.ts:188
 msgid "Charging"
-msgstr ""
+msgstr "Carregando"
 
 #: src/dashboard.ts:189
 msgid "Discharging"
-msgstr ""
+msgstr "Descarregando"
 
 #: src/dashboard.ts:190
 msgid "Fully charged"
-msgstr ""
+msgstr "Carga completa"
 
 #: src/dashboard.ts:191
 msgid "Not charging"
-msgstr ""
+msgstr "Não está carregando"
 
 #: src/dashboard.ts:192 src/dashboard.ts:203
 msgid "Unknown"
-msgstr ""
+msgstr "Desconhecido"
 
 #: src/dashboard.ts:196
 msgid "Ethernet"
-msgstr ""
+msgstr "Ethernet"
 
 #: src/dashboard.ts:197
 msgid "Wi-Fi"
-msgstr ""
+msgstr "Wi-Fi"
 
 #: src/dashboard.ts:198
 msgid "VPN"
-msgstr ""
+msgstr "VPN"
 
 #: src/dashboard.ts:199
 msgid "Mobile broadband"
-msgstr ""
+msgstr "Banda larga móvel"
 
 #: src/dashboard.ts:200
 msgid "Bluetooth"
-msgstr ""
+msgstr "Bluetooth"
 
 #: src/dashboard.ts:201
 msgid "Connected"
-msgstr ""
+msgstr "Conectado"
 
 #: src/dashboard.ts:202
 msgid "Disconnected"
-msgstr ""
+msgstr "Desconectado"
 
 #: src/dashboard.ts:493
 msgid "System"
-msgstr ""
+msgstr "Sistema"
 
 #: src/dashboard.ts:494
 msgid "User"
-msgstr ""
+msgstr "Usuário"
 
 #: src/dashboard.ts:495
 msgid "Idle"
-msgstr ""
+msgstr "Ocioso"
 
 #: src/dashboard.ts:499 src/dashboard.ts:561
 msgid "Temperature"
-msgstr ""
+msgstr "Temperatura"
 
 #: src/dashboard.ts:502
 #, javascript-format
 msgid "CPU: %s"
-msgstr ""
+msgstr "CPU: %s"
 
 #: src/dashboard.ts:510
 msgid "Used"
-msgstr ""
+msgstr "Em uso"
 
 #: src/dashboard.ts:511
 msgid "Available"
-msgstr ""
+msgstr "Disponível"
 
 #: src/dashboard.ts:512
 msgid "Cache"
-msgstr ""
+msgstr "Cache"
 
 #: src/dashboard.ts:516
 msgid "Swap"
-msgstr ""
+msgstr "Swap"
 
 #: src/dashboard.ts:519
 #, javascript-format
 msgid "Memory: %s"
-msgstr ""
+msgstr "Memória: %s"
 
 #: src/dashboard.ts:526
 #, javascript-format
 msgid "Storage: %s used"
-msgstr ""
+msgstr "Armazenamento: %s em uso"
 
 #: src/dashboard.ts:528
 msgid "Free"
-msgstr ""
+msgstr "Livre"
 
 #: src/dashboard.ts:538
 msgid "Power source"
-msgstr ""
+msgstr "Fonte de energia"
 
 #: src/dashboard.ts:538
 msgid "Power adapter"
-msgstr ""
+msgstr "Carregador"
 
 #: src/dashboard.ts:538 src/resources/ui/preferences.ui:247
 msgid "Battery"
-msgstr ""
+msgstr "Bateria"
 
 #: src/dashboard.ts:539
 msgid "Status"
-msgstr ""
+msgstr "Estado"
 
 #: src/dashboard.ts:543
 msgid "Time remaining"
-msgstr ""
+msgstr "Tempo restante"
 
 #: src/dashboard.ts:545
 msgid "Time until full"
-msgstr ""
+msgstr "Tempo até carregar"
 
 #: src/dashboard.ts:549
 msgid "Power"
-msgstr ""
+msgstr "Consumo"
 
 #: src/dashboard.ts:553
 msgid "Max capacity"
-msgstr ""
+msgstr "Capacidade máxima"
 
 #: src/dashboard.ts:557
 msgid "Cycle count"
-msgstr ""
+msgstr "Ciclos de carga"
 
 #: src/dashboard.ts:565
 #, javascript-format
 msgid "Battery: %s"
-msgstr ""
+msgstr "Bateria: %s"
 
 #: src/dashboard.ts:573
 msgid "Connection"
-msgstr ""
+msgstr "Conexão"
 
 #: src/dashboard.ts:577
 msgid "Local IP"
-msgstr ""
+msgstr "IP local"
 
 #: src/dashboard.ts:581
 msgid "Upload"
-msgstr ""
+msgstr "Envio"
 
 #: src/dashboard.ts:582
 msgid "Download"
-msgstr ""
+msgstr "Recebimento"
 
 #: src/dashboard.ts:586
 #, javascript-format
 msgid "Network: %s"
-msgstr ""
+msgstr "Rede: %s"
 
 #: src/utils.ts:175
 msgid "just now"
-msgstr ""
+msgstr "agora mesmo"
 
 #: src/utils.ts:181
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "há %d minuto"
+msgstr[1] "há %d minutos"
 
 #: src/utils.ts:187
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "há %d hora"
+msgstr[1] "há %d horas"
 
 #: src/utils.ts:192
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "há %d dia"
+msgstr[1] "há %d dias"
 
 #: src/resources/ui/preferences.ui:6 src/resources/ui/preferences.ui:11
 msgid "General"
-msgstr "Общие"
+msgstr "Geral"
 
 #: src/resources/ui/preferences.ui:15
 msgid "Displaying items"
-msgstr "Отображаемые элементы"
+msgstr "Itens exibidos"
 
 #: src/resources/ui/preferences.ui:20
 msgid "Character and percentage"
-msgstr "Персонаж и проценты"
+msgstr "Personagem e porcentagem"
 
 #: src/resources/ui/preferences.ui:21
 msgid "Percentage only"
-msgstr "Только проценты"
+msgstr "Somente porcentagem"
 
 #: src/resources/ui/preferences.ui:22
 msgid "Character only"
-msgstr "Только персонаж"
+msgstr "Somente personagem"
 
 #: src/resources/ui/preferences.ui:32
 msgid "Use a custom system monitor"
-msgstr "Использовать пользовательский системный монитор"
+msgstr "Usar um monitor do sistema personalizado"
 
 #: src/resources/ui/preferences.ui:35
 msgid "Command"
-msgstr "Команда"
+msgstr "Comando"
 
 #: src/resources/ui/preferences.ui:47
 msgid "Character"
-msgstr "Персонаж"
+msgstr "Personagem"
 
 #: src/resources/ui/preferences.ui:51
 msgid "Invert speed"
-msgstr "Инвертировать скорость"
+msgstr "Inverter velocidade"
 
 #: src/resources/ui/preferences.ui:57
 msgid "Idle threshold"
-msgstr "Порог бездействия"
+msgstr "Limite de ociosidade"
 
 #: src/resources/ui/preferences.ui:58
 msgid "Available when speed is not inverted"
-msgstr "Доступен, когда скорость не инвертирована"
+msgstr "Disponível quando a velocidade não está invertida"
 
 #: src/resources/ui/preferences.ui:74
 msgid "Smooth speed changes"
-msgstr "Плавное изменение скорости"
+msgstr "Suavizar mudanças de velocidade"
 
 #: src/resources/ui/preferences.ui:75
 msgid "Running speed adapts to CPU load gradually"
-msgstr "Скорость бега постепенно подстраивается под загрузку процессора"
+msgstr "A velocidade de corrida se adapta gradualmente à carga da CPU"
 
 #: src/resources/ui/preferences.ui:83
 msgid "Reset preferences"
-msgstr "Сбросить настройки"
+msgstr "Restaurar preferências"
 
 #: src/resources/ui/preferences.ui:84
 msgid "Reset RunCat preferences to defaults"
-msgstr "Сбросить настройки RunCat к значениям по умолчанию"
+msgstr "Restaurar as preferências do RunCat para o padrão"
 
 #: src/resources/ui/preferences.ui:113
 msgid "Metrics"
-msgstr ""
+msgstr "Métricas"
 
 #: src/resources/ui/preferences.ui:118
 msgid "Sampling"
-msgstr ""
+msgstr "Coleta"
 
 #: src/resources/ui/preferences.ui:122
 msgid "Refresh interval"
-msgstr ""
+msgstr "Intervalo de atualização"
 
 #: src/resources/ui/preferences.ui:123
 msgid "How often metrics are updated, in seconds"
-msgstr ""
+msgstr "Frequência de atualização das métricas, em segundos"
 
 #: src/resources/ui/preferences.ui:137
 msgid "Storage path"
-msgstr ""
+msgstr "Caminho do armazenamento"
 
 #: src/resources/ui/preferences.ui:146
 msgid "Appearance"
-msgstr ""
+msgstr "Aparência"
 
+#
 #: src/resources/ui/preferences.ui:150
+#
 msgid "Menu layout"
-msgstr ""
+msgstr "Layout do menu"
 
 #: src/resources/ui/preferences.ui:151
 msgid ""
 "Automatic adds columns side by side when the cards don't fit the screen "
 "height"
-msgstr ""
+msgstr "No automático, novas colunas são adicionadas lado a lado quando os cards não cabem na altura da tela"
 
 #: src/resources/ui/preferences.ui:156
 msgid "Automatic"
-msgstr ""
+msgstr "Automático"
 
 #: src/resources/ui/preferences.ui:157
 msgid "1 column"
-msgstr ""
+msgstr "1 coluna"
 
 #: src/resources/ui/preferences.ui:158
 msgid "2 columns"
-msgstr ""
+msgstr "2 colunas"
 
 #: src/resources/ui/preferences.ui:159
 msgid "3 columns"
-msgstr ""
+msgstr "3 colunas"
 
 #: src/resources/ui/preferences.ui:160
 msgid "4 columns"
-msgstr ""
+msgstr "4 colunas"
 
+#
 #: src/resources/ui/preferences.ui:169
-#, fuzzy
 msgid "Chart color"
-msgstr "Только персонаж"
+msgstr "Cor dos gráficos"
 
 #: src/resources/ui/preferences.ui:170
 msgid "Charts and bars in the menu"
-msgstr ""
+msgstr "Gráficos e barras do menu"
 
+#
 #: src/resources/ui/preferences.ui:176
 msgid "Menu background"
-msgstr ""
+msgstr "Fundo do menu"
 
 #: src/resources/ui/preferences.ui:177
 msgid "Lower the opacity for a more transparent background"
-msgstr ""
+msgstr "Diminua a opacidade para um fundo mais transparente"
 
 #: src/resources/ui/preferences.ui:186
 msgid ""
 "Metrics displayed next to the character. CPU usage is configured with "
 "“Displaying items” on the General page"
 msgstr ""
+"Métricas exibidas ao lado do personagem. O uso de CPU é configurado em "
+"“Itens exibidos” na página Geral"
 
 #: src/resources/ui/preferences.ui:190
 msgid "CPU temperature"
-msgstr ""
+msgstr "Temperatura da CPU"
 
 #: src/resources/ui/preferences.ui:196
 msgid "Memory usage"
-msgstr ""
+msgstr "Uso de memória"
 
 #: src/resources/ui/preferences.ui:202
 msgid "Storage usage"
-msgstr ""
+msgstr "Uso do armazenamento"
 
 #: src/resources/ui/preferences.ui:208
 msgid "Battery level"
-msgstr ""
+msgstr "Nível da bateria"
 
 #: src/resources/ui/preferences.ui:209 src/resources/ui/preferences.ui:248
 msgid "Hidden when there is no battery"
-msgstr ""
+msgstr "Oculto quando não há bateria"
 
 #: src/resources/ui/preferences.ui:215
-#, fuzzy
 msgid "Network speed"
-msgstr "Инвертировать скорость"
+msgstr "Velocidade da rede"
 
 #: src/resources/ui/preferences.ui:216
 msgid "Upload and download rates"
-msgstr ""
+msgstr "Taxas de envio e recebimento"
 
 #: src/resources/ui/preferences.ui:224
 msgid "Menu dashboard"
-msgstr ""
+msgstr "Painel do menu"
 
 #: src/resources/ui/preferences.ui:225
 msgid "Cards displayed when clicking the character"
-msgstr ""
+msgstr "Cards exibidos ao clicar no personagem"
 
 #: src/resources/ui/preferences.ui:229
 msgid "CPU"
-msgstr ""
+msgstr "CPU"
 
 #: src/resources/ui/preferences.ui:235
 msgid "Memory"
-msgstr ""
+msgstr "Memória"
 
 #: src/resources/ui/preferences.ui:241
 msgid "Storage"
-msgstr ""
+msgstr "Armazenamento"
 
 #: src/resources/ui/preferences.ui:254
 msgid "Network"
-msgstr ""
+msgstr "Rede"
 
 #: src/resources/ui/preferences.ui:262
 msgid "Custom"
-msgstr ""
+msgstr "Extras"
 
 #: src/resources/ui/preferences.ui:267
 msgid "How it works"
-msgstr ""
+msgstr "Como funciona"
 
 #: src/resources/ui/preferences.ui:268
 msgid ""
@@ -492,47 +492,55 @@ msgid ""
 "as soon as the file changes. Files in the metrics folder are picked up "
 "automatically; files elsewhere can be added below."
 msgstr ""
+"Qualquer script, tarefa do cron ou hook (por exemplo, a status line do "
+"Claude Code) pode gravar um pequeno arquivo JSON, e o RunCat o mostra como "
+"um card no menu, atualizado assim que o arquivo muda. Arquivos na pasta de "
+"métricas são detectados automaticamente; arquivos em outros lugares podem "
+"ser adicionados abaixo."
 
 #: src/resources/ui/preferences.ui:272
 msgid "Open metrics folder"
-msgstr ""
+msgstr "Abrir pasta de métricas"
 
 #: src/resources/ui/preferences.ui:284
 msgid "File format and examples"
-msgstr ""
+msgstr "Formato do arquivo e exemplos"
 
 #: src/resources/ui/preferences.ui:285
 msgid "Claude Code usage, Claude Code hooks, GPU and more"
-msgstr ""
+msgstr "Uso do Claude Code, hooks do Claude Code, GPU e mais"
 
 #: src/resources/ui/preferences.ui:299
 msgid "Sources"
-msgstr ""
+msgstr "Fontes"
 
 #: src/resources/ui/preferences.ui:300
 msgid ""
 "Choose where each source is displayed: as a card in the menu and/or as a "
 "value in the top bar"
 msgstr ""
+"Escolha onde cada fonte aparece: como card no menu e/ou como valor na barra "
+"superior"
 
 #: src/resources/ui/preferences.ui:307
 msgid "Add file"
-msgstr ""
+msgstr "Adicionar arquivo"
 
 #: src/resources/ui/preferences.ui:323
 msgid "The cat tells you the CPU usage by running speed"
-msgstr ""
-"Котик, который показывает загрузку\n"
-" процессора скоростью бега"
+msgstr "O gato mostra o uso da CPU pela velocidade da corrida"
 
 #: src/resources/ui/preferences.ui:327
 msgid "Visit RunCat's GitHub page"
-msgstr "Посетить страницу RunCat на GitHub"
+msgstr "Visitar a página do RunCat no GitHub"
 
 #: src/resources/ui/preferences.ui:337
 msgid "Visit Homepage"
-msgstr "Открыть домашнюю страницу"
+msgstr "Visitar página inicial"
 
 #: src/resources/ui/preferences.ui:341
 msgid "About RunCat"
-msgstr "О RunCat"
+msgstr "Sobre o RunCat"
+
+#~ msgid "The switch shows the source's value in the top bar"
+#~ msgstr "O interruptor mostra o valor da fonte na barra superior"

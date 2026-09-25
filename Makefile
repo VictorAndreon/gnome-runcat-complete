@@ -12,7 +12,7 @@ all_sources = $(shell find src -type f)
 typescript_sources = $(shell find src -type f -name '*.ts' -not -name '*.d.ts')
 typescript_compiled = $(typescript_sources:src/%.ts=.build/%.js)
 
-translations_ts_sources = src/indicator.ts src/prefs.ts
+translations_ts_sources = src/indicator.ts src/prefs.ts src/dashboard.ts src/utils.ts
 translations_ui_sources = $(wildcard src/resources/ui/*.ui)
 translations = $(wildcard po/*.po)
 
