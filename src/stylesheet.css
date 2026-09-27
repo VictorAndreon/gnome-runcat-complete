@@ -46,8 +46,8 @@
 }
 
 .runcat-dashboard {
-    spacing: 2em;
-    padding: .5em 1em;
+    spacing: 1em;
+    padding: .5em;
     border-radius: 12px;
     background-color: rgba(127, 127, 127, .12);
 }
@@ -62,7 +62,13 @@
 
 .runcat-card {
     spacing: 1em;
-    padding: .5em 0;
+    padding: .5em;
+    border-radius: 8px;
+    transition-duration: 100ms;
+}
+
+.runcat-card:hover {
+    background-color: rgba(127, 127, 127, .16);
 }
 
 .runcat-card__icon {

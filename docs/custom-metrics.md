@@ -60,6 +60,7 @@ runcat-metric remove backup
 |---|---|---|
 | [`claude-code-usage`](samples/claude-code-usage/) | Model, context window, 5-hour and 7-day limits, session cost | Claude Code status line |
 | [`claude-code-hooks`](samples/claude-code-hooks/) | Every Claude Code session: working, waiting for you, done | Claude Code hooks |
+| [`claude-usage`](samples/claude-usage/) | 5-hour and 7-day limits with reset times, for the terminal and the desktop app | systemd user timer |
 | [`gpu`](samples/gpu/) | GPU usage, VRAM, temperature, power (NVIDIA and AMD) | systemd user service |
 
 ## File format

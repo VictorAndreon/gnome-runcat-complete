@@ -1,0 +1,7 @@
+[Unit]
+Description=RunCat: Claude usage card from local transcripts
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/runcat-claude-usage.py
+Nice=10

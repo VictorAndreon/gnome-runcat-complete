@@ -32,6 +32,10 @@ import type { DashboardCardId } from './types'
 
 type Row = [label: string, value: string]
 
+// The menu item is not reactive (it would highlight every card at once): each card tracks its own hover
+const createCardBox = (): St.BoxLayout =>
+	new St.BoxLayout({ styleClass: 'runcat-card', xExpand: true, reactive: true, trackHover: true })
+
 
 class MetricCard {
 	readonly actor: St.BoxLayout
@@ -41,7 +45,7 @@ class MetricCard {
 	#rows: St.BoxLayout
 
 	constructor(icon: Gio.Icon, chart: Clutter.Actor | null = null) {
-		this.actor = new St.BoxLayout({ styleClass: 'runcat-card', xExpand: true })
+		this.actor = createCardBox()
 
 		this.#icon = new St.Icon({
 			gicon: icon,
@@ -118,7 +122,7 @@ class CustomMetricCard {
 
 	constructor(extensionPath: string) {
 		this.#extensionPath = extensionPath
-		this.actor = new St.BoxLayout({ styleClass: 'runcat-card', xExpand: true })
+		this.actor = createCardBox()
 
 		this.#icon = new St.Icon({
 			gicon: getCustomMetricIcon(extensionPath, null),
@@ -291,7 +295,7 @@ export default class Dashboard {
 	constructor(extensionPath: string) {
 		this.#extensionPath = extensionPath
 
-		this.item = new PopupBaseMenuItem({ activate: false, hover: false, can_focus: false })
+		this.item = new PopupBaseMenuItem({ reactive: false, can_focus: false })
 		this.item.add_style_class_name('runcat-dashboard-item')
 
 		this.#container = new St.BoxLayout({ styleClass: 'runcat-dashboard', xExpand: true })
