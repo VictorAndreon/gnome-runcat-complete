@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-runcat-extension 37\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-27 02:43-0300\n"
+"POT-Creation-Date: 2026-09-27 15:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -158,103 +158,115 @@ msgstr ""
 msgid "Idle"
 msgstr ""
 
-#: src/dashboard.ts:503 src/dashboard.ts:565
-msgid "Temperature"
+#: src/dashboard.ts:503
+msgid "Temperature (30 s avg)"
 msgstr ""
 
-#: src/dashboard.ts:506
+#: src/dashboard.ts:504
+msgid "Peak (30 s)"
+msgstr ""
+
+#: src/dashboard.ts:507
+msgid "Throttles at"
+msgstr ""
+
+#: src/dashboard.ts:511
 #, javascript-format
 msgid "CPU: %s"
 msgstr ""
 
-#: src/dashboard.ts:514
+#: src/dashboard.ts:519
 msgid "Used"
 msgstr ""
 
-#: src/dashboard.ts:515
+#: src/dashboard.ts:520
 msgid "Available"
 msgstr ""
 
-#: src/dashboard.ts:516
+#: src/dashboard.ts:521
 msgid "Cache"
 msgstr ""
 
-#: src/dashboard.ts:520
+#: src/dashboard.ts:525
 msgid "Swap"
 msgstr ""
 
-#: src/dashboard.ts:523
+#: src/dashboard.ts:528
 #, javascript-format
 msgid "Memory: %s"
 msgstr ""
 
-#: src/dashboard.ts:530
+#: src/dashboard.ts:535
 #, javascript-format
 msgid "Storage: %s used"
 msgstr ""
 
-#: src/dashboard.ts:532
+#: src/dashboard.ts:537
 msgid "Free"
 msgstr ""
 
-#: src/dashboard.ts:542
+#: src/dashboard.ts:547
 msgid "Power source"
 msgstr ""
 
-#: src/dashboard.ts:542
+#: src/dashboard.ts:547
 msgid "Power adapter"
 msgstr ""
 
-#: src/dashboard.ts:542 src/resources/ui/preferences.ui:247
+#: src/dashboard.ts:547 src/resources/ui/preferences.ui:247
 msgid "Battery"
 msgstr ""
 
-#: src/dashboard.ts:543
+#: src/dashboard.ts:548
 msgid "Status"
 msgstr ""
 
-#: src/dashboard.ts:547
+#: src/dashboard.ts:552
 msgid "Time remaining"
 msgstr ""
 
-#: src/dashboard.ts:549
+#: src/dashboard.ts:554
 msgid "Time until full"
 msgstr ""
 
-#: src/dashboard.ts:553
+#: src/dashboard.ts:558
 msgid "Power"
 msgstr ""
 
-#: src/dashboard.ts:557
+#: src/dashboard.ts:562
 msgid "Max capacity"
 msgstr ""
 
-#: src/dashboard.ts:561
+#: src/dashboard.ts:566
 msgid "Cycle count"
 msgstr ""
 
-#: src/dashboard.ts:569
+#: src/dashboard.ts:570
+msgid "Temperature"
+msgstr ""
+
+#: src/dashboard.ts:574
 #, javascript-format
 msgid "Battery: %s"
 msgstr ""
 
-#: src/dashboard.ts:577
+#: src/dashboard.ts:582
 msgid "Connection"
 msgstr ""
 
-#: src/dashboard.ts:581
+#: src/dashboard.ts:586
 msgid "Local IP"
 msgstr ""
 
-#: src/dashboard.ts:585
+#: src/dashboard.ts:590
 msgid "Upload"
 msgstr ""
 
-#: src/dashboard.ts:586
+#: src/dashboard.ts:591
 msgid "Download"
 msgstr ""
 
-#: src/dashboard.ts:590
+#: src/dashboard.ts:595
 #, javascript-format
 msgid "Network: %s"
 msgstr ""
