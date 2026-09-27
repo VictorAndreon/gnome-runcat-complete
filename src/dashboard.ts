@@ -500,7 +500,12 @@ export default class Dashboard {
 		]
 
 		if (cpuTemperature !== null) {
-			rows.push([_('Temperature'), formatTemperature(cpuTemperature)])
+			rows.push([_('Temperature (30 s avg)'), formatTemperature(cpuTemperature.average)])
+			rows.push([_('Peak (30 s)'), formatTemperature(cpuTemperature.peak)])
+
+			if (cpuTemperature.critical !== null) {
+				rows.push([_('Throttles at'), formatTemperature(cpuTemperature.critical)])
+			}
 		}
 
 		this.#cards.cpu.update(_('CPU: %s').format(formatPercent(cpu.usage)), rows)

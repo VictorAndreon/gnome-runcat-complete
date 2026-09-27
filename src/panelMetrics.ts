@@ -91,7 +91,7 @@ export default class PanelMetrics {
 		const { cpuTemperature, memory, storage, battery, network } = snapshot
 
 		const values: Record<PanelMetricId, string | null> = {
-			temperature: cpuTemperature !== null ? formatTemperature(cpuTemperature) : null,
+			temperature: cpuTemperature !== null ? formatTemperature(cpuTemperature.average) : null,
 			memory: memory ? formatNumber(memory.usage) : null,
 			storage: storage ? formatNumber(storage.usage) : null,
 			battery: battery ? formatNumber(battery.level) : null,

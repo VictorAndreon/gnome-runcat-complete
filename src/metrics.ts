@@ -2,7 +2,7 @@ import createCpuGenerator, { type CpuSample } from './dataProviders/cpu.js'
 import getMemorySample, { type MemorySample } from './dataProviders/memory.js'
 import getStorageSample, { type StorageSample } from './dataProviders/storage.js'
 import getBatterySample, { type BatterySample } from './dataProviders/battery.js'
-import createCpuTemperatureProvider from './dataProviders/temperature.js'
+import CpuTemperatureProvider, { type CpuTemperatureSample } from './dataProviders/temperature.js'
 import NetworkProvider, { type NetworkSample } from './dataProviders/network.js'
 
 
@@ -11,7 +11,7 @@ export const HISTORY_LENGTH = 60
 
 export type MetricsSnapshot = {
 	cpu: CpuSample
-	cpuTemperature: number | null
+	cpuTemperature: CpuTemperatureSample | null
 	memory: MemorySample | null
 	storage: StorageSample | null
 	battery: BatterySample | null
@@ -46,7 +46,7 @@ const pushLimited = (history: number[], value: number) => {
  **/
 export default class MetricsSampler {
 	#cpu = createCpuGenerator()
-	#cpuTemperature = createCpuTemperatureProvider()
+	#cpuTemperature = new CpuTemperatureProvider()
 	#network = new NetworkProvider()
 
 	#history = { cpu: [] as number[], memory: [] as number[] }
@@ -54,7 +54,7 @@ export default class MetricsSampler {
 	async sample(storagePath: string): Promise<MetricsSnapshot> {
 		const [cpu, cpuTemperature, memory, storage, battery, network] = await Promise.all([
 			this.#cpu.next().then(({ value }) => value),
-			settle(this.#cpuTemperature(), null),
+			settle(this.#cpuTemperature.sample(), null),
 			settle(getMemorySample(), null),
 			settle(getStorageSample(storagePath), null),
 			settle(getBatterySample(), null),
@@ -83,6 +83,7 @@ export default class MetricsSampler {
 
 	destroy() {
 		this.#cpu.return(undefined as never).catch(() => {})
+		this.#cpuTemperature.destroy()
 		this.#network.destroy()
 	}
 }
