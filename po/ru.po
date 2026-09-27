@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-runcat-extension 20\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 13:47+0000\n"
+"POT-Creation-Date: 2026-09-27 02:43-0300\n"
 "PO-Revision-Date: 2022-09-30 19:16+0300\n"
 "Last-Translator: Sergei Kolesnikov <sergei@kolesnikov.se>\n"
 "Language-Team: Russian\n"
@@ -88,173 +88,173 @@ msgstr ""
 msgid "Version"
 msgstr "Версия"
 
-#: src/dashboard.ts:172
+#: src/dashboard.ts:176
 #, javascript-format
 msgid "Failed to read: %s"
 msgstr ""
 
-#: src/dashboard.ts:176
+#: src/dashboard.ts:180
 #, javascript-format
 msgid "Updated %s"
 msgstr ""
 
-#: src/dashboard.ts:188
+#: src/dashboard.ts:192
 msgid "Charging"
 msgstr ""
 
-#: src/dashboard.ts:189
+#: src/dashboard.ts:193
 msgid "Discharging"
 msgstr ""
 
-#: src/dashboard.ts:190
+#: src/dashboard.ts:194
 msgid "Fully charged"
 msgstr ""
 
-#: src/dashboard.ts:191
+#: src/dashboard.ts:195
 msgid "Not charging"
 msgstr ""
 
-#: src/dashboard.ts:192 src/dashboard.ts:203
+#: src/dashboard.ts:196 src/dashboard.ts:207
 msgid "Unknown"
 msgstr ""
 
-#: src/dashboard.ts:196
+#: src/dashboard.ts:200
 msgid "Ethernet"
 msgstr ""
 
-#: src/dashboard.ts:197
+#: src/dashboard.ts:201
 msgid "Wi-Fi"
 msgstr ""
 
-#: src/dashboard.ts:198
+#: src/dashboard.ts:202
 msgid "VPN"
 msgstr ""
 
-#: src/dashboard.ts:199
+#: src/dashboard.ts:203
 msgid "Mobile broadband"
 msgstr ""
 
-#: src/dashboard.ts:200
+#: src/dashboard.ts:204
 msgid "Bluetooth"
 msgstr ""
 
-#: src/dashboard.ts:201
+#: src/dashboard.ts:205
 msgid "Connected"
 msgstr ""
 
-#: src/dashboard.ts:202
+#: src/dashboard.ts:206
 msgid "Disconnected"
 msgstr ""
 
-#: src/dashboard.ts:493
+#: src/dashboard.ts:497
 msgid "System"
 msgstr ""
 
-#: src/dashboard.ts:494
+#: src/dashboard.ts:498
 msgid "User"
 msgstr ""
 
-#: src/dashboard.ts:495
+#: src/dashboard.ts:499
 msgid "Idle"
 msgstr ""
 
-#: src/dashboard.ts:499 src/dashboard.ts:561
+#: src/dashboard.ts:503 src/dashboard.ts:565
 msgid "Temperature"
 msgstr ""
 
-#: src/dashboard.ts:502
+#: src/dashboard.ts:506
 #, javascript-format
 msgid "CPU: %s"
 msgstr ""
 
-#: src/dashboard.ts:510
+#: src/dashboard.ts:514
 msgid "Used"
 msgstr ""
 
-#: src/dashboard.ts:511
+#: src/dashboard.ts:515
 msgid "Available"
 msgstr ""
 
-#: src/dashboard.ts:512
+#: src/dashboard.ts:516
 msgid "Cache"
 msgstr ""
 
-#: src/dashboard.ts:516
+#: src/dashboard.ts:520
 msgid "Swap"
 msgstr ""
 
-#: src/dashboard.ts:519
+#: src/dashboard.ts:523
 #, javascript-format
 msgid "Memory: %s"
 msgstr ""
 
-#: src/dashboard.ts:526
+#: src/dashboard.ts:530
 #, javascript-format
 msgid "Storage: %s used"
 msgstr ""
 
-#: src/dashboard.ts:528
+#: src/dashboard.ts:532
 msgid "Free"
 msgstr ""
 
-#: src/dashboard.ts:538
+#: src/dashboard.ts:542
 msgid "Power source"
 msgstr ""
 
-#: src/dashboard.ts:538
+#: src/dashboard.ts:542
 msgid "Power adapter"
 msgstr ""
 
-#: src/dashboard.ts:538 src/resources/ui/preferences.ui:247
+#: src/dashboard.ts:542 src/resources/ui/preferences.ui:247
 msgid "Battery"
 msgstr ""
 
-#: src/dashboard.ts:539
+#: src/dashboard.ts:543
 msgid "Status"
 msgstr ""
 
-#: src/dashboard.ts:543
+#: src/dashboard.ts:547
 msgid "Time remaining"
 msgstr ""
 
-#: src/dashboard.ts:545
+#: src/dashboard.ts:549
 msgid "Time until full"
 msgstr ""
 
-#: src/dashboard.ts:549
+#: src/dashboard.ts:553
 msgid "Power"
 msgstr ""
 
-#: src/dashboard.ts:553
+#: src/dashboard.ts:557
 msgid "Max capacity"
 msgstr ""
 
-#: src/dashboard.ts:557
+#: src/dashboard.ts:561
 msgid "Cycle count"
 msgstr ""
 
-#: src/dashboard.ts:565
+#: src/dashboard.ts:569
 #, javascript-format
 msgid "Battery: %s"
 msgstr ""
 
-#: src/dashboard.ts:573
+#: src/dashboard.ts:577
 msgid "Connection"
 msgstr ""
 
-#: src/dashboard.ts:577
+#: src/dashboard.ts:581
 msgid "Local IP"
 msgstr ""
 
-#: src/dashboard.ts:581
+#: src/dashboard.ts:585
 msgid "Upload"
 msgstr ""
 
-#: src/dashboard.ts:582
+#: src/dashboard.ts:586
 msgid "Download"
 msgstr ""
 
-#: src/dashboard.ts:586
+#: src/dashboard.ts:590
 #, javascript-format
 msgid "Network: %s"
 msgstr ""
